@@ -1,4 +1,5 @@
 let tarefas = [];
+let indiceEditando = null; // Adicione essa variável global
 
 function adicionarTarefa(){
 
@@ -23,7 +24,7 @@ function adicionarTarefa(){
         msg.textContent = mensagem;
         setTimeout(function() {
             msg.textContent = "";
-        }, 5000);
+        }, 3000);
 
 
     tarefas.push(tarefa);
@@ -41,6 +42,60 @@ function renderizarTarefas() {
     for (let i = 0; i < tarefas.length; i++) {
         const itemLista = document.createElement("li");
         itemLista.textContent = tarefas[i];
+
+        let botaoRemover = document.createElement("button");
+        botaoRemover.textContent = "Remover";
+        botaoRemover.className = "remover";
+        botaoRemover.onclick = function() {
+            removerTarefa(i);
+        };
+
+        let botaoEditar = document.createElement("button");
+        botaoEditar.textContent = "Editar";
+        botaoEditar.className = "editar";
+        botaoEditar.onclick = function() {
+            editarTarefa(i);
+        };
+
+        itemLista.appendChild(botaoEditar);
+        itemLista.appendChild(botaoRemover);
         listaTarefas.appendChild(itemLista);
     }
 }
+
+function removerTarefa(i) {
+    tarefas.splice(i, 1);
+    renderizarTarefas();
+    const msg = document.getElementById("mensagem");
+    msg.textContent = "Tarefa removida com sucesso!";
+    msg.style.color = "#000000ff";
+    setTimeout(function() {
+        msg.textContent = "";
+    }, 3000);
+}
+
+function editarTarefa(i) {
+    indiceEditando = i;
+    document.getElementById("input-editar").value = tarefas[i];
+    document.getElementById("modal-editar").style.display = "flex";
+}
+
+// Função para salvar a edição
+document.getElementById("salvar-edicao").onclick = function() {
+    const novoValor = document.getElementById("input-editar").value.trim();
+    if (novoValor !== "") {
+        tarefas[indiceEditando] = novoValor;
+        renderizarTarefas();
+        document.getElementById("mensagem").textContent = "Tarefa editada com sucesso!";
+        document.getElementById("mensagem").style.color = "#28A745";
+        setTimeout(() => document.getElementById("mensagem").textContent = "", 3000);
+    }
+    document.getElementById("modal-editar").style.display = "none";
+    indiceEditando = null;
+};
+
+// Função para cancelar a edição
+document.getElementById("cancelar-edicao").onclick = function() {
+    document.getElementById("modal-editar").style.display = "none";
+    indiceEditando = null;
+};

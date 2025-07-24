@@ -108,3 +108,30 @@ button.editar:hover {
     background-color: #60041A;
     color: #F4F0EA;
 }
+
+/* Modal simples */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-conteudo {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.modal-conteudo input {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+.modal-conteudo button {
+  margin: 0 5px;
+}
