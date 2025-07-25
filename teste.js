@@ -114,3 +114,8 @@ document.getElementById("limparLista").onclick = function() {
         msg.textContent = "";
     }, 3000);
 };
+
+// Botão para alternar tema
+document.getElementById("toggleTema").onclick = function() {
+    document.body.classList.toggle("dark-theme");
+};
