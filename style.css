@@ -135,3 +135,29 @@ button.editar:hover {
 .modal-conteudo button {
   margin: 0 5px;
 }
+
+#limparLista {
+    display: none;
+}
+
+#listaTarefas {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #A34743 #F4F0EA;
+}
+
+#listaTarefas::-webkit-scrollbar {
+    width: 8px;
+    background: #F4F0EA;
+}
+
+#listaTarefas::-webkit-scrollbar-thumb {
+    background: #A34743;
+    border-radius: 4px;
+}
+
+#listaTarefas::-webkit-scrollbar-track {
+    background: #60041A;
+}
