@@ -1,5 +1,6 @@
 :root {
   --bg-color: #F4F0EA;
+  --bg-color-editar: #E0D7C4;
   --text-color: #331F19;
   --container-color: #CBBBA7;
   --button-color: #798252;
@@ -10,6 +11,7 @@
 
 .dark-theme {
   --bg-color: #1A110F;
+  --bg-color-editar: #2B1F1C;
   --text-color: #F4F0EA;
   --container-color: #3C2E2B;
   --button-color: #798252;
@@ -142,7 +144,9 @@ button.editar:hover {
   z-index: 1000;
 }
 .modal-conteudo {
-  background: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;

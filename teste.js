@@ -71,7 +71,7 @@ function removerTarefa(i) {
     renderizarTarefas();
     const msg = document.getElementById("mensagem");
     msg.textContent = "Tarefa removida com sucesso!";
-    msg.style.color = "#000000ff";
+    msg.style.color = "var(--text-color)";
     setTimeout(function() {
         msg.textContent = "";
     }, 3000);
