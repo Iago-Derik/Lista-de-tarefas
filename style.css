@@ -75,6 +75,24 @@ ul li {
     margin: 5px 0;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ul li button {
+    margin-left: auto;
+}
+
+ul li button.concluir {
+    margin-left: auto;
+}
+
+ul li button.editar,
+ul li button.remover {
+    margin-left: 5px;
 }
 
 /* Estilo para o campo de entrada */
@@ -106,11 +124,12 @@ button.remover {
     margin-left: 5px;
     transition: background-color 0.3s ease;
 }
+
 button.remover:hover {
     background-color: #8b0525;
 }
 button.editar {
-    background-color: var(--button-color);
+    background-color: #FFD166;
     color: var(--text-color);
     padding: 5px 5px;
     border: none;
@@ -120,8 +139,9 @@ button.editar {
     margin-left: 5px;
     transition: background-color 0.3s ease;
 }
+
 button.editar:hover {
-    background-color: #744d41;
+    background-color: #FFC300;
 }
 
 .botao_lista {
@@ -243,4 +263,44 @@ label.toggleTema::before {
 
 .darkTheme #imgTemaEscuro {
   opacity: 0;
+}
+
+.no-transition #toggleTema {
+    transition: none !important;
+}
+
+.concluida {
+    background-color: #108d16 !important;
+    color: #fff !important;
+    opacity: 0.7;
+}
+
+.tarefa-texto {
+    padding-left: 10px;
+    word-break: break-word;
+    white-space: pre-line;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.concluida .tarefa-texto {
+    text-decoration: line-through;
+    color: #fff !important;
+    opacity: 0.7;
+}
+
+button.concluir {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+button.concluir:hover {
+    background-color: var(--button-hover);
 }

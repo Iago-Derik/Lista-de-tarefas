@@ -1,5 +1,9 @@
-let tarefas = [];
+let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 let indiceEditando = null; // Adicione essa variável global
+
+function salvarTarefas() {
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
 
 function adicionarTarefa(){
 
@@ -27,7 +31,8 @@ function adicionarTarefa(){
         }, 4000);
 
 
-    tarefas.push(tarefa);
+    tarefas.push({ texto: tarefa, concluida: false });
+    salvarTarefas();
     renderizarTarefas();
 
     inputTarefa.value = "";
@@ -40,7 +45,22 @@ function renderizarTarefas() {
 
     for (let i = 0; i < tarefas.length; i++) {
         const itemLista = document.createElement("li");
-        itemLista.textContent = tarefas[i];
+        const textoTarefa = document.createElement("span");
+        textoTarefa.className = "tarefa-texto";
+        textoTarefa.textContent = tarefas[i].texto;
+        itemLista.appendChild(textoTarefa);
+        if (tarefas[i].concluida) {
+            itemLista.classList.add("concluida");
+        }
+
+        let botaoConcluir = document.createElement("button");
+        botaoConcluir.textContent = tarefas[i].concluida ? "Desfazer" : "Concluir";
+        botaoConcluir.className = "concluir";
+        botaoConcluir.onclick = function() {
+            tarefas[i].concluida = !tarefas[i].concluida;
+            salvarTarefas();
+            renderizarTarefas();
+        };
 
         let botaoRemover = document.createElement("button");
         botaoRemover.textContent = "Remover";
@@ -56,6 +76,7 @@ function renderizarTarefas() {
             editarTarefa(i);
         };
 
+        itemLista.appendChild(botaoConcluir);
         itemLista.appendChild(botaoEditar);
         itemLista.appendChild(botaoRemover);
         listaTarefas.appendChild(itemLista);
@@ -68,6 +89,7 @@ function renderizarTarefas() {
 
 function removerTarefa(i) {
     tarefas.splice(i, 1);
+    salvarTarefas(); // Salva no localStorage
     renderizarTarefas();
     const msg = document.getElementById("mensagem");
     msg.textContent = "Tarefa removida com sucesso!";
@@ -79,7 +101,7 @@ function removerTarefa(i) {
 
 function editarTarefa(i) {
     indiceEditando = i;
-    document.getElementById("input-editar").value = tarefas[i];
+    document.getElementById("input-editar").value = tarefas[i].texto;
     document.getElementById("modal-editar").style.display = "flex";
 }
 
@@ -87,7 +109,8 @@ function editarTarefa(i) {
 document.getElementById("salvarEdicao").onclick = function() {
     const novoValor = document.getElementById("input-editar").value.trim();
     if (novoValor !== "") {
-        tarefas[indiceEditando] = novoValor;
+        tarefas[indiceEditando].texto = novoValor;
+        salvarTarefas(); // Salva no localStorage
         renderizarTarefas();
         document.getElementById("mensagem").textContent = "Tarefa editada com sucesso!";
         document.getElementById("mensagem").style.color = "#28A745";
@@ -106,6 +129,7 @@ document.getElementById("cancelar-edicao").onclick = function() {
 // Função para limpar a lista
 document.getElementById("limparLista").onclick = function() {
     tarefas = [];
+    salvarTarefas(); // Salva no localStorage
     renderizarTarefas();
     const msg = document.getElementById("mensagem");
     msg.textContent = "Lista limpa com sucesso!";
@@ -118,4 +142,21 @@ document.getElementById("limparLista").onclick = function() {
 // Botão para alternar tema
 document.getElementById("toggleTema").onclick = function() {
     document.body.classList.toggle("dark-theme");
+    localStorage.setItem("tema", document.body.classList.contains("dark-theme") ? "dark" : "light");
+};
+
+document.body.classList.add("no-transition");
+
+if (localStorage.getItem("tema") === "dark") {
+    document.body.classList.add("dark-theme");
+    document.getElementById("toggleTema").checked = true;
+} else {
+    document.body.classList.remove("dark-theme");
+    document.getElementById("toggleTema").checked = false;
+}
+
+// Remova a classe após o carregamento completo
+window.onload = function() {
+    document.body.classList.remove("no-transition");
+    renderizarTarefas();
 };
