@@ -24,7 +24,7 @@ function adicionarTarefa(){
         msg.textContent = mensagem;
         setTimeout(function() {
             msg.textContent = "";
-        }, 3000);
+        }, 4000);
 
 
     tarefas.push(tarefa);
@@ -36,7 +36,6 @@ function adicionarTarefa(){
 
 function renderizarTarefas() {
     const listaTarefas = document.getElementById("listaTarefas");
-
     listaTarefas.innerHTML = "";
 
     for (let i = 0; i < tarefas.length; i++) {
@@ -61,6 +60,10 @@ function renderizarTarefas() {
         itemLista.appendChild(botaoRemover);
         listaTarefas.appendChild(itemLista);
     }
+
+    // Mostra ou esconde o botão "Limpar Lista"
+    const btnLimpar = document.getElementById("limparLista");
+    btnLimpar.style.display = tarefas.length > 0 ? "inline-block" : "none";
 }
 
 function removerTarefa(i) {
@@ -81,7 +84,7 @@ function editarTarefa(i) {
 }
 
 // Função para salvar a edição
-document.getElementById("salvar-edicao").onclick = function() {
+document.getElementById("salvarEdicao").onclick = function() {
     const novoValor = document.getElementById("input-editar").value.trim();
     if (novoValor !== "") {
         tarefas[indiceEditando] = novoValor;
@@ -98,4 +101,16 @@ document.getElementById("salvar-edicao").onclick = function() {
 document.getElementById("cancelar-edicao").onclick = function() {
     document.getElementById("modal-editar").style.display = "none";
     indiceEditando = null;
+};
+
+// Função para limpar a lista
+document.getElementById("limparLista").onclick = function() {
+    tarefas = [];
+    renderizarTarefas();
+    const msg = document.getElementById("mensagem");
+    msg.textContent = "Lista limpa com sucesso!";
+    msg.style.color = "#28A745";
+    setTimeout(function() {
+        msg.textContent = "";
+    }, 3000);
 };
