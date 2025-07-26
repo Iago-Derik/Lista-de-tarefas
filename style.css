@@ -1,0 +1,306 @@
+:root {
+  --bg-color: #F4F0EA;
+  --bg-color-editar: #E0D7C4;
+  --text-color: #331F19;
+  --container-color: #CBBBA7;
+  --button-color: #798252;
+  --button-red-color: #A34743;
+  --button-hover: #CCD595;
+  --border-color: #8B7D70;
+}
+
+.dark-theme {
+  --bg-color: #1A110F;
+  --bg-color-editar: #2B1F1C;
+  --text-color: #F4F0EA;
+  --container-color: #3C2E2B;
+  --button-color: #798252;
+  --button-red-color: #A34743;
+  --button-hover: #CCD595;
+  --border-color: #5A4C44;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--bg-color);
+}
+
+
+.container {
+    text-align: center;
+    background-color: var(--container-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--border-color);
+    width: 90%;
+    max-width: 600px;
+    border: 2px solid var(--border-color);
+}
+h1 {
+    color: var(--text-color);
+}
+p {
+    color: var(--text-color);
+    font-size: 1.1em;
+}
+button {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: var(--button-hover);
+    color: var(--text-color);
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+ul li {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ul li button {
+    margin-left: auto;
+}
+
+ul li button.concluir {
+    margin-left: auto;
+}
+
+ul li button.editar,
+ul li button.remover {
+    margin-left: 5px;
+}
+
+/* Estilo para o campo de entrada */
+input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+input[type="text"]:focus {
+    border-color: #60041A;
+    box-shadow: inset 0 2px 4px rgba(96, 4, 26, 0.3);
+}
+button.remover {
+    background-color: var(--button-red-color);
+    color: var(--text-color);
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.remover:hover {
+    background-color: #8b0525;
+}
+button.editar {
+    background-color: #FFD166;
+    color: var(--text-color);
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.editar:hover {
+    background-color: #FFC300;
+}
+
+.botao_lista {
+    background-color: var(--button-red-color);
+}
+
+.botao_lista:hover {
+    background-color: #8b0525;
+    color: var(--text-color);
+}
+
+/* Modal simples */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-conteudo {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.modal-conteudo input {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+.modal-conteudo button {
+  margin: 0 5px;
+}
+
+#limparLista {
+    display: none;
+}
+
+#listaTarefas {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--button-color) var(--bg-color);
+}
+
+#listaTarefas::-webkit-scrollbar {
+    width: 8px;
+    background: var(--bg-color);
+}
+
+#listaTarefas::-webkit-scrollbar-thumb {
+    background: var(--button-color);
+    border-radius: 4px;
+}
+
+#listaTarefas::-webkit-scrollbar-track {
+    background: var(--button-hover);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label.toggleTema {
+    position: relative; width: 50px; height: 25px;
+    display: inline-block;
+    background-color: var(--button-color);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+label.toggleTema::before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    top: 2px;
+    left: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+
+#toggleTema:checked + label.toggleTema {
+  background-color: var(--button-color);
+}
+
+#toggleTema:checked + label.toggleTema::before {
+    transform: translateX(25px);
+    background: black;
+}
+
+.toggleTema img {
+  width: 18px;
+  height: 18px;
+  top: 3px;
+  left: 3px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  padding-top: 3px;
+}
+
+#imgTemaClaro {
+  opacity: 0;
+}
+
+.darkTheme #imgTemaClaro {
+  opacity: 1;
+}
+
+.darkTheme #imgTemaEscuro {
+  opacity: 0;
+}
+
+.no-transition #toggleTema {
+    transition: none !important;
+}
+
+.concluida {
+    background-color: #108d16 !important;
+    color: #fff !important;
+    opacity: 0.7;
+}
+
+.tarefa-texto {
+    padding-left: 10px;
+    word-break: break-word;
+    white-space: pre-line;
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.concluida .tarefa-texto {
+    text-decoration: line-through;
+    color: #fff !important;
+    opacity: 0.7;
+}
+
+button.concluir {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.6em;
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
+}
+button.concluir:hover {
+    background-color: var(--button-hover);
+}
