@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página inicial</title>
-    <link rel="stylesheet" href="style.css">
-</head> 
-<body class="lightTheme darkTheme">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="lightTheme darkTheme">
     <div class="container">
-        <h1>Lista de tarefas</h1>
-        <p>Adicione suas tarefas!</p>
+      <h1>Lista de tarefas</h1>
+      <p>Adicione suas tarefas!</p>
 
-        <input type="checkbox" id="toggleTema">
-        <label for="toggleTema" class="toggleTema">
-          <img id="imgTemaClaro" src="img/sun_sunshine_sunrise_icon_151789.png" alt="ícone de sol">
-          <img id="imgTemaDark" src="img/42645crescentmoon_99074.png" alt="ícone de lua">
-        </label>
-        <br>
-        <input type="text" id="Tarefa" placeholder="Digite sua tarefa">
-        <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
-        <button id="limparLista" class="botao_lista">Limpar Tudo</button>
-        <p id="mensagem"></p>
-        <ul id="listaTarefas"></ul>
+      <input type="checkbox" id="toggleTema" />
+      <label for="toggleTema" class="toggleTema">
+        // Ícones para alternar entre temas
+        <img
+          id="imgTemaClaro"
+          src="img/sun_sunshine_sunrise_icon_151789.png"
+          alt="ícone de sol"
+        />
+        <img
+          id="imgTemaDark"
+          src="img/42645crescentmoon_99074.png"
+          alt="ícone de lua"
+        />
+      </label>
+      <br />
+      <input type="text" id="Tarefa" placeholder="Digite sua tarefa" />
+      <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+      <button id="limparLista" class="botao_lista">Limpar Tudo</button>
+      <p id="mensagem"></p>
+      <ul id="listaTarefas"></ul>
     </div>
 
     <!-- Modal de edição -->
-    <div id="modal-editar" class="modal" style="display:none;">
+    <div id="modal-editar" class="modal" style="display: none">
       <div class="modal-conteudo">
         <h2>Editar tarefa</h2>
         <input type="text" id="input-editar" />
@@ -33,7 +42,7 @@
         <button id="cancelar-edicao">Cancelar</button>
       </div>
     </div>
-    
+
     <script src="teste.js"></script>
-</body>
+  </body>
 </html>
