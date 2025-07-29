@@ -160,3 +160,9 @@ window.onload = function() {
     document.body.classList.remove("no-transition");
     renderizarTarefas();
 };
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js');
+    });
+}
