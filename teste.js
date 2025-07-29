@@ -103,6 +103,7 @@ function editarTarefa(i) {
     indiceEditando = i;
     document.getElementById("input-editar").value = tarefas[i].texto;
     document.getElementById("modal-editar").style.display = "flex";
+    document.getElementById("modal-editar").classList.add("mostrar");
 }
 
 // Função para salvar a edição
@@ -159,6 +160,7 @@ if (localStorage.getItem("tema") === "dark") {
 window.onload = function() {
     document.body.classList.remove("no-transition");
     renderizarTarefas();
+    document.querySelector('.container').classList.add('mostrar');
 };
 
 if ('serviceWorker' in navigator) {
