@@ -305,3 +305,37 @@ button.concluir {
 button.concluir:hover {
     background-color: var(--button-hover);
 }
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+        max-width: 98vw;
+        width: 100vw;
+        border-radius: 0;
+    }
+
+    input[type="text"] {
+        width: 95vw;
+        max-width: 98vw;
+        font-size: 1em;
+    }
+
+    ul li {
+        padding: 8px 4px;
+        font-size: 0.95em;
+    }
+
+    .modal-conteudo {
+        min-width: 90vw;
+        padding: 10px;
+    }
+}
+
+/* Ajuste para botões em telas pequenas */
+@media (max-width: 400px) {
+    button, button.concluir, button.editar, button.remover {
+        padding: 6px 8px;
+        font-size: 0.8em;
+    }
+}
