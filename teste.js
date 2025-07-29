@@ -36,6 +36,7 @@ function adicionarTarefa(){
     renderizarTarefas();
 
     inputTarefa.value = "";
+    inputTarefa.focus(); // Deixa o campo pronto para digitar novamente
     }
 }
 
@@ -168,3 +169,10 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js');
     });
 }
+
+// Adiciona tarefa ao pressionar Enter
+document.getElementById("Tarefa").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        adicionarTarefa();
+    }
+});
