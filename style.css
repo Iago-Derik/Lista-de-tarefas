@@ -235,11 +235,11 @@ button.editar:hover {
 }
 
 #listaTarefas {
-  max-height: 300px;
+  max-height: 300px; /* já está, mas ajusta se quiser */
   overflow-y: auto;
-  margin-bottom: 16px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--button-color) var(--bg-color);
+  box-sizing: border-box; /* garantir que padding/borda não aumentem tamanho */
+  margin-top: 16px;
+  word-wrap: break-word; /* evitar que textos longos quebrem layout */
 }
 
 #listaTarefas::-webkit-scrollbar {
