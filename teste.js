@@ -10,10 +10,11 @@ function adicionarTarefa() {
   const mensagem = "Tarefa adicionada com sucesso!";
   const inputTarefa = document.getElementById("Tarefa");
   const inputData = document.getElementById("dataTarefa");
+  const msg = document.getElementById("mensagem");
+
   let tarefa = inputTarefa.value.trim();
   let data = inputData.value;
 
-  const msg = document.getElementById("mensagem");
   msg.style.color = "#28A745";
 
   if (tarefa === "") {
@@ -22,26 +23,30 @@ function adicionarTarefa() {
     setTimeout(function () {
       msg.textContent = "";
     }, 2000);
-  } else if (data === "") {
-    msg.textContent = "Selecione uma data para a tarefa.";
-    msg.style.color = "#A34743";
-    setTimeout(function () {
-      msg.textContent = "";
-    }, 2000);
-  } else {
-    msg.textContent = mensagem;
-    setTimeout(function () {
-      msg.textContent = "";
-    }, 4000);
-
-    tarefas.push({ texto: tarefa, concluida: false, data: data }); // data deve ser YYYY-MM-DD
-    salvarTarefas();
-    renderizarTarefas();
-
-    inputTarefa.value = "";
-    inputData.value = "";
-    inputTarefa.focus();
+    return;
   }
+
+  // Se a data estiver vazia, define como data de hoje (YYYY-MM-DD)
+  if (!data) {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    data = `${ano}-${mes}-${dia}`;
+  }
+
+  msg.textContent = mensagem;
+  setTimeout(function () {
+    msg.textContent = "";
+  }, 4000);
+
+  tarefas.push({ texto: tarefa, concluida: false, data: data });
+  salvarTarefas();
+  renderizarTarefas();
+
+  inputTarefa.value = "";
+  inputData.value = "";
+  inputTarefa.focus();
 }
 
 function renderizarTarefas() {
