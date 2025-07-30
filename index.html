@@ -5,56 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página inicial</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FFD166">
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#FFD166" />
     <!-- FullCalendar CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css"
+      rel="stylesheet"
+    />
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
   </head>
-  <body class="light-theme darkTheme">
-    <div class="container">
-      <h1>Lista de tarefas</h1>
-      <p>Adicione suas tarefas!</p>
-
-      <input type="checkbox" id="toggleTema" />
-      <label for="toggleTema" class="toggleTema">
-        <img
-          id="imgTemaClaro"
-          src="img/sun_sunshine_sunrise_icon_151789.png"
-          alt="ícone de sol"
-        />
-        <img
-          id="imgTemaDark"
-          src="img/42645crescentmoon_99074.png"
-          alt="ícone de lua"
-        />
-      </label>
-      <br />
-      <input type="text" id="Tarefa" placeholder="Digite sua tarefa" />
-      <input type="date" id="dataTarefa" />
-      <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
-      <button id="limparLista" class="botao_lista">Limpar Tudo</button>
-      <p id="mensagem"></p>
-      <ul id="listaTarefas"></ul>
-    </div>
-
-    <!-- Modal de edição -->
-    <div id="modal-editar" class="modal" style="display: none">
-      <div class="modal-conteudo">
-        <h2>Editar tarefa</h2>
-        <input type="text" id="input-editar" />
-        <button id="salvarEdicao">Salvar</button>
-        <button id="cancelar-edicao">Cancelar</button>
+  <body>
+    <div class="conteudo-geral">
+      <div class="container">
+        <h1>Lista de tarefas</h1>
+        <p>Adicione suas tarefas!</p>
+        <input type="checkbox" id="toggleTema" />
+        <label for="toggleTema" class="toggleTema">
+          <img
+            id="imgTemaClaro"
+            src="img/sun_sunshine_sunrise_icon_151789.png"
+            alt="ícone de sol"
+          />
+          <img
+            id="imgTemaDark"
+            src="img/42645crescentmoon_99074.png"
+            alt="ícone de lua"
+          />
+        </label>
+        <br />
+        <input type="checkbox" id="toggleRainbow" />
+        <label for="toggleRainbow" class="toggleRainbow">
+          <img id="imgNormal" src="img/normal_icon.png" alt="Normal" />
+          <img id="imgRainbow" src="img/rainbow_icon.png" alt="Rainbow" />
+        </label>
+        <br />
+        <input type="text" id="Tarefa" placeholder="Digite sua tarefa" />
+        <input type="date" id="dataTarefa" />
+        <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
+        <button id="limparLista" class="botao_lista">Limpar Tudo</button>
+        <p id="mensagem"></p>
+        <ul id="listaTarefas"></ul>
+      </div>
+      <!-- Modal de edição -->
+      <div id="modal-editar" class="modal" style="display: none">
+        <div class="modal-conteudo">
+          <h2>Editar tarefa</h2>
+          <input type="text" id="input-editar" />
+          <button id="salvarEdicao">Salvar</button>
+          <button id="cancelar-edicao">Cancelar</button>
+        </div>
+      </div>
+      <div id="calendario-container">
+        <div class="calendario-topo">
+          <h2 id="titulo-calendario">Calendário</h2>
+          <button id="toggleCalendario" class="toggleCalendario">
+            Mês/Semana
+          </button>
+        </div>
+        <div id="calendario-dinamico"></div>
       </div>
     </div>
-    <div id="calendario-container">
-    <div class="calendario-topo">
-        <h2 id="titulo-calendario">Calendário</h2>
-        <button id="toggleCalendario" class="toggleCalendario">Mês/Semana</button>
-    </div>
-    <div id="calendario-dinamico"></div>
-</div>
 
     <script src="teste.js"></script>
   </body>

@@ -1,176 +1,211 @@
-:root {
-  --bg-color: linear-gradient(135deg, #ffb6f9 0%, #a0e7e5 40%, #b4ff9f 60%, #ff6f91 80%, #fcb1b1 100%);
-  --bg-color-editar: #E0D7C4;
-  --text-color: #331F19;
-  --container-color: rgba(255,255,255,0.4);
-  --button-color: #798252;
-  --button-red-color: #A34743;
-  --button-hover: #CCD595;
-  --border-color: #8B7D70;
+* {
+  box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #b8aba7; /* fundo claro normal */
+  --bg-color-editar: #e0d7c4;
+  --text-color: #331f19;
+  --container-color: rgba(255, 255, 255, 0.4);
+  --calendar-bg: rgba(255, 255, 255, 0.534);
+  --button-color: #798252;
+  --button-red-color: #a34743;
+  --button-hover: #ccd595;
+  --border-color: #8b7d70;
+}
+
+/* Tema escuro normal */
 .dark-theme {
-  --bg-color: linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%);
-  --bg-color-editar: #2B1F1C;
-  --text-color: #F4F0EA;
+  --bg-color: #331f19; /* fundo escuro normal */
+  --bg-color-editar: #2b1f1c;
+  --text-color: #f4f0ea;
   --calendar-bg: #0807079b;
   --container-color: #17151492;
   --button-color: #798252;
-  --button-red-color: #A34743;
-  --button-hover: #CCD595;
-  --border-color: #5A4C44;
+  --button-red-color: #a34743;
+  --button-hover: #ccd595;
+  --border-color: #5a4c44;
+}
+
+/* Tema rainbow claro */
+.rainbow-claro {
+  --bg-color: linear-gradient(
+    135deg,
+    #ffb6f9 0%,
+    #a0e7e5 40%,
+    #b4ff9f 60%,
+    #ff6f91 80%,
+    #fcb1b1 100%
+  );
+}
+
+/* Tema rainbow escuro */
+.rainbow-escuro {
+  --bg-color: linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%);
 }
 
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: var(--bg-color);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: var(--bg-color);
 }
 
+body.normal-claro .fc-theme-standard td,
+body.normal-claro .fc-theme-standard th {
+  border: 1px solid #2222223d !important; /* preto ou quase preto */
+}
 
 .container {
-    text-align: center;
-    background-color: var(--container-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--border-color);
-    width: 90%;
-    max-width: 600px;
-    border: 2px solid var(--border-color);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.4,0,.2,1);
+  text-align: center;
+  background-color: var(--container-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--border-color);
+  width: 90%;
+  max-width: 600px;
+  border: 2px solid var(--border-color);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .container.mostrar {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 h1 {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 p {
-    color: var(--text-color);
-    font-size: 1.1em;
+  color: var(--text-color);
+  font-size: 1.1em;
 }
 button {
-    background-color: var(--button-color);
-    color: var(--text-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-top: 10px;
+  background-color: var(--button-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
 }
 button:hover {
-    background-color: var(--button-hover);
-    color: var(--text-color);
+  background-color: var(--button-hover);
+  color: var(--text-color);
 }
 button:active {
-    transform: scale(0.96);
+  transform: scale(0.96);
 }
 ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
 }
 ul li {
-    background: rgba(255,255,255,0.6); /* caixa das tarefas mais transparente */
-    color: var(--text-color);
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 0;
-    padding-right: 5;
-    border: 1px solid var(--border-color);
-    transition: background 0.3s, color 0.3s, opacity 0.3s;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* caixa das tarefas mais transparente */
+  color: var(--text-color);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0;
+  padding-right: 5;
+  border: 1px solid var(--border-color);
+  transition: background 0.3s, color 0.3s, opacity 0.3s;
 }
 
 ul li button {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 ul li button.concluir {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 ul li button.editar,
 ul li button.remover {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 /* Estilo para o campo de entrada */
 input[type="text"] {
-    padding: 10px;
-    width: 80%;
-    max-width: 500px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: none;
-    transition: border-color 0.3s ease;
+  padding: 10px;
+  width: 80%;
+  max-width: 500px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1em;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 input[type="text"]:focus {
-    border-color: #60041A;
-    box-shadow: inset 0 2px 4px rgba(96, 4, 26, 0.3);
+  border-color: #60041a;
+  box-shadow: inset 0 2px 4px rgba(96, 4, 26, 0.3);
 }
 button.remover {
-    background-color: var(--button-red-color);
-    color: var(--text-color);
-    padding: 5px 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.6em;
-    margin-left: 5px;
-    transition: background-color 0.3s ease;
+  background-color: var(--button-red-color);
+  color: var(--text-color);
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.6em;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
 }
 
 button.remover:hover {
-    background-color: #8b0525;
+  background-color: #8b0525;
 }
 button.editar {
-    background-color: #FFD166;
-    color: var(--text-color);
-    padding: 5px 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.6em;
-    margin-left: 5px;
-    transition: background-color 0.3s ease;
+  background-color: #ffd166;
+  color: var(--text-color);
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.6em;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
 }
 
 button.editar:hover {
-    background-color: #FFC300;
+  background-color: #ffc300;
 }
 
 .botao_lista {
-    background-color: var(--button-red-color);
+  background-color: var(--button-red-color);
 }
 
 .botao_lista:hover {
-    background-color: #8b0525;
-    color: var(--text-color);
+  background-color: #8b0525;
+  color: var(--text-color);
 }
 
 /* Modal simples */
 .modal {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +218,7 @@ button.editar:hover {
   padding: 20px;
   border-radius: 8px;
   min-width: 300px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 .modal-conteudo input {
@@ -196,29 +231,29 @@ button.editar:hover {
 }
 
 #limparLista {
-    display: none;
+  display: none;
 }
 
 #listaTarefas {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 16px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--button-color) var(--bg-color);
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--button-color) var(--bg-color);
 }
 
 #listaTarefas::-webkit-scrollbar {
-    width: 8px;
-    background: var(--bg-color);
+  width: 8px;
+  background: var(--bg-color);
 }
 
 #listaTarefas::-webkit-scrollbar-thumb {
-    background: var(--button-color);
-    border-radius: 4px;
+  background: var(--button-color);
+  border-radius: 4px;
 }
 
 #listaTarefas::-webkit-scrollbar-track {
-    background: var(--button-hover);
+  background: var(--button-hover);
 }
 
 input[type="checkbox"] {
@@ -226,34 +261,35 @@ input[type="checkbox"] {
 }
 
 label.toggleTema {
-    position: relative; width: 50px; height: 25px;
-    display: inline-block;
-    background-color: var(--button-color);
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  position: relative;
+  width: 50px;
+  height: 25px;
+  display: inline-block;
+  background-color: var(--button-color);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 label.toggleTema::before {
-    content: "";
-    position: absolute;
-    width: 21px;
-    height: 21px;
-    top: 2px;
-    left: 2px;
-    background: white;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
+  content: "";
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 2px;
+  left: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
-
 
 #toggleTema:checked + label.toggleTema {
   background-color: var(--button-color);
 }
 
 #toggleTema:checked + label.toggleTema::before {
-    transform: translateX(25px);
-    background: black;
+  transform: translateX(25px);
+  background: black;
 }
 
 .toggleTema img {
@@ -266,152 +302,154 @@ label.toggleTema::before {
   padding-top: 3px;
 }
 
-#imgTemaClaro {
-  opacity: 0;
+body.normal-claro #imgTemaClaro,
+body.rainbow-claro #imgTemaClaro {
+  opacity: 1;
 }
-
-.darkTheme #imgTemaClaro {
+body.normal-escuro #imgTemaClaro,
+body.rainbow-escuro #imgTemaClaro {
   opacity: 1;
 }
 
-.darkTheme #imgTemaEscuro {
-  opacity: 0;
-}
-
 .no-transition #toggleTema {
-    transition: none !important;
+  transition: none !important;
 }
 
 .concluida {
-    background-color: #108d16 !important;
-    color: #fff !important;
-    opacity: 0.7;
+  background-color: #108d16 !important;
+  color: #fff !important;
+  opacity: 0.7;
 }
 
 .tarefa-texto {
-    padding-left: 10px;
-    word-break: break-word;
-    white-space: pre-line;
-    flex: 1;
-    min-width: 0;
-    text-align: left;
+  padding-left: 10px;
+  word-break: break-word;
+  white-space: pre-line;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
 }
 
 .concluida .tarefa-texto {
-    text-decoration: line-through;
-    color: #fff !important;
-    opacity: 0.7;
+  text-decoration: line-through;
+  color: #fff !important;
+  opacity: 0.7;
 }
 
 button.concluir {
-    background-color: var(--button-color);
-    color: var(--text-color);
-    padding: 5px 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.6em;
-    margin-left: 5px;
-    transition: background-color 0.3s ease;
+  background-color: var(--button-color);
+  color: var(--text-color);
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.6em;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
 }
 button.concluir:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 .toggleCalendario {
-    background: #FFD166;
-    color: #331F19;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 18px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s;
+  background: #ffd166;
+  color: #331f19;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s;
 }
 .toggleCalendario:hover {
-    background: #FFC300;
+  background: #ffc300;
 }
 
 #calendario-container {
-    position: relative;
-    max-width: 400px;
-    margin: 0 auto 20px auto;
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
 }
 
 .calendario-topo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 0 10px;
 }
 
 .toggleCalendario {
-    position: static; /* Remove o absolute */
-    margin-left: 10px;
-    color: var(--text-color);
-    margin-bottom: 0;
+  position: static; /* Remove o absolute */
+  margin-left: 10px;
+  color: var(--text-color);
+  margin-bottom: 0;
 }
 
 /* Responsividade para telas menores */
 @media (max-width: 600px) {
-    .container {
-        padding: 10px;
-        max-width: 98vw;
-        width: 100vw;
-        border-radius: 0;
-    }
+  .container {
+    padding: 10px;
+    max-width: 98vw;
+    width: 100vw;
+    border-radius: 0;
+  }
 
-    input[type="text"] {
-        width: 95vw;
-        max-width: 98vw;
-        font-size: 1em;
-    }
+  input[type="text"] {
+    width: 95vw;
+    max-width: 98vw;
+    font-size: 1em;
+  }
 
-    ul li {
-        padding: 8px 4px;
-        font-size: 0.95em;
-    }
+  ul li {
+    padding: 8px 4px;
+    font-size: 0.95em;
+  }
 
-    .modal-conteudo {
-        min-width: 90vw;
-        padding: 10px;
-    }
+  .modal-conteudo {
+    min-width: 90vw;
+    padding: 10px;
+  }
 }
 
 /* Ajuste para botões em telas pequenas */
 @media (max-width: 400px) {
-    button, button.concluir, button.editar, button.remover {
-        padding: 6px 8px;
-        font-size: 0.8em;
-    }
+  button,
+  button.concluir,
+  button.editar,
+  button.remover {
+    padding: 6px 8px;
+    font-size: 0.8em;
+  }
 }
 
 #modal-editar {
-    transition: opacity 0.4s, transform 0.4s;
-    opacity: 0;
-    transform: scale(0.95);
+  transition: opacity 0.4s, transform 0.4s;
+  opacity: 0;
+  transform: scale(0.95);
 }
 #modal-editar.mostrar {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 
 #calendario-dinamico {
-    margin: 0 auto 20px auto;
-    max-width: 400px;
-    background: var(--calendar-bg); /* calendário mais transparente */
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 30px 10px 10px 10px; /* aumenta o topo para não sobrepor */
+  margin: 0 auto 20px auto;
+  max-width: 400px;
+  background: var(--calendar-bg); /* calendário mais transparente */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 30px 10px 10px 10px; /* aumenta o topo para não sobrepor */
 }
 
-ul li, #calendario-dinamico, .container {
-    color: #331F19;
+ul li,
+#calendario-dinamico,
+.container {
+  color: #331f19;
 }
 
 #titulo-calendario {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
 /* FullCalendar - textos e elementos adaptados ao tema */
@@ -419,27 +457,150 @@ ul li, #calendario-dinamico, .container {
 .fc-theme-standard .fc-col-header-cell-cushion,
 .fc-theme-standard .fc-daygrid-day-number,
 .fc-theme-standard .fc-toolbar-title,
-.fc-theme-standard,.fc-theme-standard {
-    color: var(--text-color) !important;
-    background: transparent;
+.fc-theme-standard,
+.fc-theme-standard {
+  color: var(--text-color) !important;
+  background: transparent;
 }
 
 .fc-theme-standard .fc-button-primary {
-    border: 1px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .fc-theme-standard .fc-button-primary:not(:disabled):hover {
-    background: var(--button-hover);
-    color: var(--text-color);
+  background: var(--button-hover);
+  color: var(--text-color);
 }
 
 .tarefa-data {
-    margin-left: 8px;
-    font-size: 0.95em;
-    opacity: 0.7;
+  margin-left: 8px;
+  font-size: 0.95em;
+  opacity: 0.7;
 }
 
 .destaque-tarefa {
-    box-shadow: 0 0 0 3px #FFD166;
-    transition: box-shadow 0.3s;
+  box-shadow: 0 0 0 3px #ffd166;
+  transition: box-shadow 0.3s;
+}
+
+/* Estilo do botão Rainbow */
+label.toggleRainbow {
+  position: relative;
+  width: 50px;
+  height: 25px;
+  display: inline-block;
+  background-color: var(--button-color);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+label.toggleRainbow::before {
+  content: "";
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 2px;
+  left: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+#toggleRainbow:checked + label.toggleRainbow {
+  background-color: #ff6f91;
+}
+
+#toggleRainbow:checked + label.toggleRainbow::before {
+  transform: translateX(25px);
+  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd);
+}
+
+.toggleRainbow img {
+  width: 15px;
+  height: 15px;
+  top: 3px;
+  left: 3px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  padding-top: 3px;
+}
+
+#imgNormal {
+  opacity: 1;
+  left: 6px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+
+#imgRainbow {
+  opacity: 1;
+  right: 6px;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+}
+
+#toggleRainbow:checked + label.toggleRainbow #imgNormal {
+  opacity: 1;
+}
+
+#toggleRainbow:checked + label.toggleRainbow #imgRainbow {
+  opacity: 1;
+}
+
+.dia-selecionado {
+  background-color: rgba(255, 209, 102, 0.2) !important; /* amarelo bem leve */
+  box-shadow: 0 0 0 2px #ffd166 inset !important; /* borda interna leve */
+  border-radius: 6px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.conteudo-geral {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  padding: 10px;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 600px) {
+  .conteudo-geral {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #calendario-container {
+    order: -1; /* coloca o calendário acima da box */
+    width: 100%;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  #calendario-dinamico {
+    width: 100%;
+  }
+}
+
+#Tarefa {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#dataTarefa {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  border-radius: 5px;
+  border: #2b1f1c solid 2px;
+  color: var(--text-color);
 }
