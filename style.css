@@ -1,8 +1,8 @@
 :root {
-  --bg-color: linear-gradient(90deg, #efbe74 0%, #dfc793 50%, #e4ae6d 100%);
+  --bg-color: linear-gradient(135deg, #ffb6f9 0%, #a0e7e5 40%, #b4ff9f 60%, #ff6f91 80%, #fcb1b1 100%);
   --bg-color-editar: #E0D7C4;
   --text-color: #331F19;
-  --container-color: #CBBBA7;
+  --container-color: rgba(255,255,255,0.4);
   --button-color: #798252;
   --button-red-color: #A34743;
   --button-hover: #CCD595;
@@ -10,10 +10,11 @@
 }
 
 .dark-theme {
-  --bg-color: linear-gradient(90deg, #1A110F 0%, #6b2716 50%, #3C2E2B 100%);
+  --bg-color: linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%);
   --bg-color-editar: #2B1F1C;
   --text-color: #F4F0EA;
-  --container-color: #3C2E2B;
+  --calendar-bg: #0807079b;
+  --container-color: #17151492;
   --button-color: #798252;
   --button-red-color: #A34743;
   --button-hover: #CCD595;
@@ -79,7 +80,7 @@ ul {
     margin-top: 20px;
 }
 ul li {
-    background: var(--bg-color);
+    background: rgba(255,255,255,0.6); /* caixa das tarefas mais transparente */
     color: var(--text-color);
     padding: 10px;
     margin: 5px 0;
@@ -317,6 +318,41 @@ button.concluir:hover {
     background-color: var(--button-hover);
 }
 
+.toggleCalendario {
+    background: #FFD166;
+    color: #331F19;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+.toggleCalendario:hover {
+    background: #FFC300;
+}
+
+#calendario-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+}
+
+.calendario-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+}
+
+.toggleCalendario {
+    position: static; /* Remove o absolute */
+    margin-left: 10px;
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 600px) {
     .container {
@@ -359,4 +395,51 @@ button.concluir:hover {
 #modal-editar.mostrar {
     opacity: 1;
     transform: scale(1);
+}
+
+#calendario-dinamico {
+    margin: 0 auto 20px auto;
+    max-width: 400px;
+    background: var(--calendar-bg); /* calendário mais transparente */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 30px 10px 10px 10px; /* aumenta o topo para não sobrepor */
+}
+
+ul li, #calendario-dinamico, .container {
+    color: #331F19;
+}
+
+#titulo-calendario {
+    color: var(--text-color);
+}
+
+/* FullCalendar - textos e elementos adaptados ao tema */
+.fc-theme-standard .fc-scrollgrid,
+.fc-theme-standard .fc-col-header-cell-cushion,
+.fc-theme-standard .fc-daygrid-day-number,
+.fc-theme-standard .fc-toolbar-title,
+.fc-theme-standard,.fc-theme-standard {
+    color: var(--text-color) !important;
+    background: transparent;
+}
+
+.fc-theme-standard .fc-button-primary {
+    border: 1px solid var(--border-color);
+}
+
+.fc-theme-standard .fc-button-primary:not(:disabled):hover {
+    background: var(--button-hover);
+    color: var(--text-color);
+}
+
+.tarefa-data {
+    margin-left: 8px;
+    font-size: 0.95em;
+    opacity: 0.7;
+}
+
+.destaque-tarefa {
+    box-shadow: 0 0 0 3px #FFD166;
+    transition: box-shadow 0.3s;
 }

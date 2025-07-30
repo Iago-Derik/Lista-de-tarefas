@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FFD166">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
   </head>
   <body class="light-theme darkTheme">
     <div class="container">
@@ -28,6 +32,7 @@
       </label>
       <br />
       <input type="text" id="Tarefa" placeholder="Digite sua tarefa" />
+      <input type="date" id="dataTarefa" />
       <button onclick="adicionarTarefa()">Adicionar Tarefa</button>
       <button id="limparLista" class="botao_lista">Limpar Tudo</button>
       <p id="mensagem"></p>
@@ -43,6 +48,13 @@
         <button id="cancelar-edicao">Cancelar</button>
       </div>
     </div>
+    <div id="calendario-container">
+    <div class="calendario-topo">
+        <h2 id="titulo-calendario">Calendário</h2>
+        <button id="toggleCalendario" class="toggleCalendario">Mês/Semana</button>
+    </div>
+    <div id="calendario-dinamico"></div>
+</div>
 
     <script src="teste.js"></script>
   </body>

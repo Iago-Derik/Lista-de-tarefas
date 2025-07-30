@@ -1,42 +1,40 @@
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 let indiceEditando = null; // Adicione essa variável global
+let diaSelecionado = null;
 
 function salvarTarefas() {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
-function adicionarTarefa(){
-
-    // Criando a variável que informe que foi adicionada a tarefa
+function adicionarTarefa() {
     const mensagem = "Tarefa adicionada com sucesso!";
     const inputTarefa = document.getElementById("Tarefa");
+    const inputData = document.getElementById("dataTarefa");
     let tarefa = inputTarefa.value.trim();
+    let data = inputData.value;
 
     const msg = document.getElementById("mensagem");
     msg.style.color = "#28A745";
 
-    // Validando se a tarefa está vazia
     if (tarefa === "") {
         msg.textContent = "Por favor, insira uma tarefa.";
         msg.style.color = "#A34743";
-        setTimeout(function() {
-            msg.textContent = "";
-        }, 2000);
-    }
-    // Se a tarefa não estiver vazia, adicioná-la à lista
-    else {
+        setTimeout(function() { msg.textContent = ""; }, 2000);
+    } else if (data === "") {
+        msg.textContent = "Selecione uma data para a tarefa.";
+        msg.style.color = "#A34743";
+        setTimeout(function() { msg.textContent = ""; }, 2000);
+    } else {
         msg.textContent = mensagem;
-        setTimeout(function() {
-            msg.textContent = "";
-        }, 4000);
+        setTimeout(function() { msg.textContent = ""; }, 4000);
 
+        tarefas.push({ texto: tarefa, concluida: false, data: data }); // data deve ser YYYY-MM-DD
+        salvarTarefas();
+        renderizarTarefas();
 
-    tarefas.push({ texto: tarefa, concluida: false });
-    salvarTarefas();
-    renderizarTarefas();
-
-    inputTarefa.value = "";
-    inputTarefa.focus(); // Deixa o campo pronto para digitar novamente
+        inputTarefa.value = "";
+        inputData.value = "";
+        inputTarefa.focus();
     }
 }
 
@@ -49,6 +47,7 @@ function renderizarTarefas() {
         const textoTarefa = document.createElement("span");
         textoTarefa.className = "tarefa-texto";
         textoTarefa.textContent = tarefas[i].texto;
+
         itemLista.appendChild(textoTarefa);
         if (tarefas[i].concluida) {
             itemLista.classList.add("concluida");
@@ -81,11 +80,43 @@ function renderizarTarefas() {
         itemLista.appendChild(botaoEditar);
         itemLista.appendChild(botaoRemover);
         listaTarefas.appendChild(itemLista);
+
+        itemLista.onclick = function() {
+            if (window.calendar && tarefas[i].data) {
+                window.calendar.gotoDate(tarefas[i].data);
+
+                // Aguarda o calendário renderizar e faz scroll até o dia
+                setTimeout(function() {
+                    const calendarEl = document.getElementById('calendario-dinamico');
+                    // Procura o elemento do dia no calendário
+                    const dayCell = calendarEl.querySelector('[data-date="' + tarefas[i].data + '"]');
+                    if (dayCell) {
+                        dayCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 200); // tempo suficiente para renderizar
+            }
+        };
     }
 
     // Mostra ou esconde o botão "Limpar Lista"
     const btnLimpar = document.getElementById("limparLista");
     btnLimpar.style.display = tarefas.length > 0 ? "inline-block" : "none";
+
+    // Atualiza eventos do calendário imediatamente
+    if (window.calendar) {
+        window.calendar.removeAllEvents();
+        tarefas.forEach((t, idx) => {
+            if (t.data) {
+                window.calendar.addEvent({
+                    id: 'tarefa-' + idx,
+                    title: t.texto,
+                    start: t.data,
+                    backgroundColor: t.concluida ? '#00bb0a' : (document.body.classList.contains('dark-theme') ? '#3a1c71' : '#FFD166'),
+                    textColor: document.body.classList.contains('dark-theme') ? '#fff' : '#331F19'
+                });
+            }
+        });
+    }
 }
 
 function removerTarefa(i) {
@@ -162,6 +193,66 @@ window.onload = function() {
     document.body.classList.remove("no-transition");
     renderizarTarefas();
     document.querySelector('.container').classList.add('mostrar');
+
+    // Inicializa o calendário dinâmico
+    const calendarEl = document.getElementById('calendario-dinamico');
+    let calendarioView = 'dayGridMonth'; // Visualização inicial
+
+    if (calendarEl) {
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: calendarioView,
+            locale: 'pt-br',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: ''
+            },
+            buttonText: { today: 'Hoje' },
+            editable: true, // Permite arrastar eventos
+            events: tarefas.map((t, idx) => ({
+                id: 'tarefa-' + idx,
+                title: t.texto,
+                start: t.data,
+                backgroundColor: t.concluida ? '#00bb0a' : (document.body.classList.contains('dark-theme') ? '#3a1c71' : '#FFD166'),
+                textColor: document.body.classList.contains('dark-theme') ? '#fff' : '#331F19'
+            })),
+            eventDrop: function(info) {
+                const idx = tarefas.findIndex((t, i) => info.event.id === 'tarefa-' + i);
+                if (idx !== -1) {
+                    tarefas[idx].data = info.event.startStr;
+                    salvarTarefas();
+                    renderizarTarefas();
+                }
+            },
+            dateClick: function(info) {
+                // Destacar o dia clicado (opcional)
+            },
+            eventClick: function(info) {
+                // Procura o item na lista de tarefas pelo texto e data
+                const idx = tarefas.findIndex((t, i) => info.event.id === 'tarefa-' + i);
+                if (idx !== -1) {
+                    const listaTarefas = document.getElementById("listaTarefas");
+                    const item = listaTarefas.children[idx];
+                    if (item) {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        // Opcional: destaque visual
+                        item.classList.add('destaque-tarefa');
+                        setTimeout(() => item.classList.remove('destaque-tarefa'), 1200);
+                    }
+                }
+            }
+        });
+        calendar.render();
+        window.calendar = calendar; // Salva a instância global para atualizar depois
+
+        // Atualiza eventos ao mudar de semana/mês
+        document.getElementById('toggleCalendario').onclick = function() {
+            calendarioView = calendarioView === 'dayGridMonth' ? 'dayGridWeek' : 'dayGridMonth';
+            calendar.changeView(calendarioView);
+        };
+    }
+
+    // ...seu código do Pikaday pode ser removido...
 };
 
 if ('serviceWorker' in navigator) {
