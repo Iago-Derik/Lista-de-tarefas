@@ -49,6 +49,27 @@ function adicionarTarefa() {
   inputTarefa.focus();
 }
 
+
+function atualizarCalendario() {
+  const calendarEl = document.getElementById("calendario-dinamico");
+
+  // Só continua se o calendário já foi criado
+  if (!window.calendar) return;
+
+  // Remove todos os eventos antes de atualizar
+  window.calendar.removeAllEvents();
+
+  tarefas.forEach((t, i) => {
+    window.calendar.addEvent({
+      id: "tarefa-" + i,
+      title: t.texto,
+      start: t.data,
+      allDay: true,
+    });
+  });
+}
+
+
 function renderizarTarefas() {
   const listaTarefas = document.getElementById("listaTarefas");
   listaTarefas.innerHTML = "";
@@ -109,6 +130,7 @@ function renderizarTarefas() {
         }, 200); // tempo suficiente para renderizar
       }
     };
+    atualizarCalendario();
   }
 
   // Mostra ou esconde o botão "Limpar Lista"
@@ -155,23 +177,34 @@ function editarTarefa(i) {
   document.getElementById("input-editar").value = tarefas[i].texto;
   document.getElementById("modal-editar").style.display = "flex";
   document.getElementById("modal-editar").classList.add("mostrar");
+  document.getElementById("input-data-editar").value = tarefas[i].data;
+
 }
 
 // Função para salvar a edição
 document.getElementById("salvarEdicao").onclick = function () {
   const novoValor = document.getElementById("input-editar").value.trim();
+  const novaData = document.getElementById("input-data-editar").value;
+
   if (novoValor !== "") {
     tarefas[indiceEditando].texto = novoValor;
-    salvarTarefas(); // Salva no localStorage
-    renderizarTarefas();
+
+    // ✅ Só atualiza a data se tiver valor novo
+    if (novaData !== "") {
+      tarefas[indiceEditando].data = novaData;
+    }
+
+    salvarTarefas(); // Atualiza localStorage
+    renderizarTarefas(); // Atualiza na tela (e no calendário)
+
     document.getElementById("mensagem").textContent =
       "Tarefa editada com sucesso!";
     document.getElementById("mensagem").style.color = "#28A745";
-    setTimeout(
-      () => (document.getElementById("mensagem").textContent = ""),
-      3000
-    );
+    setTimeout(() => {
+      document.getElementById("mensagem").textContent = "";
+    }, 3000);
   }
+
   document.getElementById("modal-editar").style.display = "none";
   indiceEditando = null;
 };

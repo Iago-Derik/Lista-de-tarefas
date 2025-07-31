@@ -606,3 +606,14 @@ label.toggleRainbow::before {
   border: #2b1f1c solid 2px;
   color: var(--text-color);
 }
+
+#input-data-editar {
+  padding: 8px;
+  margin-top: 8px;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1em;
+  width: 90%;
+  max-width: 250px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
